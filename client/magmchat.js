@@ -12,6 +12,10 @@ Template.inicio.events({
 			$("#texto").val($("#texto").val()+"\n");
 		} else if (evt.keyCode == 13) {
 			var val=$("#texto").val();
+			if (val.trim().length==0) {
+				$("#texto").val("");
+        return;
+      }
 			val = val.replace(/(\r\n|\n|\r)/gm,"<br/>");
 			Meteor.call('enviarTexto',Meteor.user().username,val,
 				function (error, result) { 
@@ -21,7 +25,6 @@ Template.inicio.events({
 				}
 			);
 			$("#texto").val("");
-			$("#texto").focus();
 		}
 	}
 });
